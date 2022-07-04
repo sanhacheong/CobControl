@@ -20,6 +20,12 @@
         "DefaultPassword": "root"
       },
       {
+        "Name": "DPM10",
+        "Address": "cob2_dpm10",
+        "DefaultUser": "root",
+        "DefaultPassword": "root"
+      },
+      {
         "Name": "DPM12",
         "Address": "cob2_dpm12",
         "DefaultUser": "root",
