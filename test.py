@@ -41,11 +41,14 @@ def main(command,
     print(f"Commands will be sent to: {rce_hosts}")
 
     output = client.run_command(command)
+    # print(output)
 
+    print()
     for host_output in output:
-        # print(host_output)
+        print(f"Printing stdout from host `{host_output.host}`:")
         for line in host_output.stdout:
             print(line)
+        print()
 
     print("Exiting script successfully!!!")
 
