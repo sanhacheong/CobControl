@@ -1,4 +1,5 @@
 import json
+import re
 from pprint import pprint
 
 import fire
@@ -10,24 +11,30 @@ from pssh.config import HostConfig
 def main(command,
          cob_name="COB2",
          config_json="./cob_host_config.json",
-         on_off_bits="111011111"):
+         target_machine="dpm"):
 
     print(f"Opening COB config file: {config_json}")
     with open(config_json, 'r') as f:
-        host_config = json.load(f)
+        config_dict = json.load(f)
     print(f"Successfully loaded COB config file!!!")
 
-    print(f"Configuring parallel SSH links to RCE's...")
-    if len(on_off_bits) != len(host_config[cob_name]["RCEList"]):
-        raise ValueError(f"Length of on_off_bits ({len(on_off_bits)}) does NOT match # of RCE's in config ({len(host_config[cob_name]['RCEList'])})!")
+    if target_machine.lower().startswith("dpm"):
+        rce_list = re.findall(f"{target_machine}\S*",
+                              ' '.join([rce for rce in config_dict[cob_name].keys()]),
+                              flags=re.IGNORECASE)
+    elif target_machine.lower() == "dtm":
+        rce_list = ["dtm"]
+    else:
+        raise ValueError("Provided target_machine does not correspond to any DPM or DTM!")
+
     rce_hosts = []
     rce_configs = []
-    for i, rce in enumerate(host_config[cob_name]["RCEList"]):
-        if int(on_off_bits[i]):
-            rce_hosts.append(rce["Address"])
-            rce_configs.append(
-                HostConfig(user=rce["DefaultUser"], password=rce["DefaultPassword"])
-            )
+    for rce_name in rce_list:
+        rce_hosts.append(config_dict[cob_name][rce_name]["Address"])
+        rce_configs.append(
+            HostConfig(user=config_dict[cob_name][rce_name]["DefaultUser"],
+                       password=config_dict[cob_name][rce_name]["DefaultPassword"])
+        )
 
     client = ParallelSSHClient(rce_hosts, host_config=rce_configs)
     print("Successfully configured SSH links!")
