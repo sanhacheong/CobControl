@@ -20,8 +20,8 @@ def main(command,
     print(f"Successfully loaded COB config file!!!\n")
 
     rce_list = re.findall(f"{target_machine}\S*",
-                              ' '.join([rce for rce in config_dict[cob_name].keys()]),
-                              flags=re.IGNORECASE)
+                          ' '.join([rce for rce in config_dict[cob_name].keys()]),
+                          flags=re.IGNORECASE)
 
     rce_hosts = []
     rce_configs = []
@@ -43,14 +43,14 @@ def main(command,
         print(f"Hosts: {rce_hosts}")
         print(f"Command: {command}")
         output = client.run_command(command)
-        print("Commands sent and run without errors!")
+        print("Commands sent and run without errors!!!")
     elif isinstance(command, list):
         print("Sending different command for each hosts in parallel...")
         for i, cmd in enumerate(command):
             print(f"Host: {rce_hosts[i]}")
             print(f"Command: {cmd}")
         output = client.run_command("%s", host_args=command)
-        print("Commands sent and run without errors!")
+        print("Commands sent and run without errors!!!")
 
     # print(output)
 
