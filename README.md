@@ -43,8 +43,8 @@ Opening COB config file...
 COB config file: ./cob_host_config.json
 Successfully loaded COB config file!!!
 
-['cob2_dpm00', 'cob2_dpm02', 'cob2_dpm12', 'cob2_dpm20', 'cob2_dpm22', 'cob2_dpm30', 'cob2_dpm32']
 Setting up SSH hosts...
+['cob2_dpm00', 'cob2_dpm02', 'cob2_dpm12', 'cob2_dpm20', 'cob2_dpm22', 'cob2_dpm30', 'cob2_dpm32']
 Successfully configured SSH links!!!
 
 Sending the same command to all hosts...
@@ -82,8 +82,8 @@ Opening COB config file...
 COB config file: ./cob_host_config.json
 Successfully loaded COB config file!!!
 
-['cob2_dpm20', 'cob2_dpm22']
 Setting up SSH hosts...
+['cob2_dpm20', 'cob2_dpm22']
 Successfully configured SSH links!!!
 
 Sending different command for each hosts in parallel...
