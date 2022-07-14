@@ -19,14 +19,9 @@ def main(command,
         config_dict = json.load(f)
     print(f"Successfully loaded COB config file!!!\n")
 
-    if target_machine.lower().startswith("dpm"):
-        rce_list = re.findall(f"{target_machine}\S*",
+    rce_list = re.findall(f"{target_machine}\S*",
                               ' '.join([rce for rce in config_dict[cob_name].keys()]),
                               flags=re.IGNORECASE)
-    elif target_machine.lower() == "dtm":
-        rce_list = ["dtm"]
-    else:
-        raise ValueError("Provided target_machine does not correspond to any DPM or DTM!")
 
     rce_hosts = []
     rce_configs = []
