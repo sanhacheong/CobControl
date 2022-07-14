@@ -31,7 +31,7 @@ def main(command,
             HostConfig(user=config_dict[cob_name][rce_name]["DefaultUser"],
                        password=config_dict[cob_name][rce_name]["DefaultPassword"])
         )
-        
+
     print("Setting up SSH hosts...")
     print(rce_hosts)
     client = ParallelSSHClient(rce_hosts, host_config=rce_configs)
@@ -50,6 +50,7 @@ def main(command,
             print(f"Host: {rce_hosts[i]}")
             print(f"Command: {cmd}")
         output = client.run_command("%s", host_args=command)
+        print("Commands sent and run without errors!")
 
     # print(output)
 

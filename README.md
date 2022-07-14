@@ -91,12 +91,13 @@ Host: cob2_dpm20
 Command: date
 Host: cob2_dpm22
 Command: sleep 5; date
+Commands sent and run without errors!
 
 Printing stdout from host `cob2_dpm20`:
-Thu Jul 14 00:47:45 UTC 2022
+Thu Jul 14 00:56:58 UTC 2022
 
 Printing stdout from host `cob2_dpm22`:
-Thu Jul 14 00:47:50 UTC 2022
+Thu Jul 14 00:57:03 UTC 2022
 
 Exiting script successfully!!!
 ```
