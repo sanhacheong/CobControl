@@ -39,7 +39,7 @@ The main, required argument is `command` to be passed to all the machines. `comm
 The target host machines can be specified by the optional argument `target_machine`, which is a case-insensitive, Python regex string that selects machines from the COB host configuration `.json` file. The default value for `target_machine` is `"dpm"`.
 
 In the example below, we pass a simple command `uname` to all the DPM's listed in `./cob_host_config.json`.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_send_commands.py "uname" --target_machine dpm
 Opening COB config file...
 COB config file: ./cob_host_config.json
@@ -78,7 +78,7 @@ Linux
 Exiting script successfully!!!
 ```
 In the example below, we pass commands only to `dpm2*`, which selects `dpm20` and `dpm22` from `./cob_host_config.json`. Two different commands are passed to `dpm20` and `dpm22` respectively, and one can see that the date-time result is delayed by 5 seconds.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_send_commands.py '["date", "sleep 5; date"]' --target_machine dpm2
 Opening COB config file...
 COB config file: ./cob_host_config.json
@@ -109,7 +109,7 @@ Exiting script successfully!!!
 We can also send and receive files via SCP protocol using `cob_scp_out.py` and `cob_scp_in.py` scripts.
 
 In the example below, we send a single local test file `./test_file_local` to `dpm2*`. Note that we *MUST* specify the target remote path as an *absolute* path to a specific file name. Just specifying the remote path as a directory will result in errors.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_scp_out.py ./test_file_local /root/test_file_from_rddev111_host --target_machine dpm2
 Opening COB config file...
 COB config file: ./cob_host_config.json
@@ -129,7 +129,7 @@ Files sent without errors!!!
 Exiting script successfully!!!
 ```
 One can recursively copy a local directory to the host RCE's as well. In this case, the target remote path should also be an *absolute* path to a directory. If the specified directories do not exist on remote hosts, they will be created recursively.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_scp_out.py ./test_dir_local /root/test_dir_from_host_rddev111 --target_machine dpm2
 Opening COB config file...
 COB config file: ./cob_host_config.json
@@ -151,7 +151,7 @@ Files sent without errors!!!
 Exiting script successfully!!!
 ```
 Similarly, we can scp files from specified RCE's into the local machine, using `cob_scp_in.py`. Again, the remote target path must be an absolute path. Note that the names of the scp'ed local copies will be automatically appended by `_hostname`.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_scp_in.py /root/test_file ./test_file --target_machine dpm2
 Opening COB config file...
 COB config file: ./cob_host_config.json
@@ -171,7 +171,7 @@ Files received without errors!!!
 Exiting script successfully!!!
 ```
 This can also be done recursively over directories. In this case, the top directory name will be appended by `_hostname`.
-```bash
+```
 (cob_control) -bash-4.2$ python cob_scp_in.py /root/test_dir ~/test_dir --target_machine dpm2
 Opening COB config file...
 COB config file: ./cob_host_config.json
