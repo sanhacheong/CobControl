@@ -2,6 +2,8 @@
 *config.json
 # Virtual environment set up at SLAC RDDEV111 machine
 setup_venv.sh
+# test files and directories
+test*
 
 
 
