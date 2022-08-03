@@ -12,7 +12,7 @@ from gevent import joinall
 
 def main(remote_path, local_path,
          cob_name="COB2",
-         config_json="./cob_host_config.json",
+         config_json="./.config/cob_host_config.json",
          target_machine="dpm"):
 
     enable_logger(logger)

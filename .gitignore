@@ -1,5 +1,7 @@
 # Network config file specific to SLAC ATLAS lab set-up
-*config.json
+config/*
+# Except the example config
+!config/example_host_config.json
 # Virtual environment set up at SLAC RDDEV111 machine
 setup_venv.sh
 # test files and directories

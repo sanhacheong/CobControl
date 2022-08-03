@@ -1,0 +1,13 @@
+{
+    "<some_cob>": {
+        "<dtm>": {
+            "Address": "<network_address>",
+            "DefaultUser": "<user_name>",
+            "DefaultPassword": "<password>"
+        },
+        "<some_dpm>": {
+            "Address": "<network_address>",
+            "DefaultUser": "<user_name>",
+            "DefaultPassword": "<password>"
+        }
+}

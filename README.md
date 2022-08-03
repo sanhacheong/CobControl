@@ -9,7 +9,7 @@ One can create a virtual environment with the required packages with `source cre
 Once installed, one can simply activate the virtual environment using `source setup_venv.sh`.
 
 ## COB Configs
-To send commands via parallel SSH, each RCE on the COB must be accessible on the network. The script needs a host configuration stored in a `.json` file, in the following format:
+To send commands via parallel SSH, each RCE on the COB must be accessible on the network. The script needs a host configuration stored in a `.json` file. These configs are stored in the `./config/` directory, and `example_host_config.json` shows the format for these files:
 ```json
 {
     "<some_cob>": {
@@ -27,7 +27,6 @@ To send commands via parallel SSH, each RCE on the COB must be accessible on the
     }
 }
 ```
-On the `rddev111` machine at SLAC, you can find an example in `/home/sanha/CobControl/cob_host_config.json`.
 
 ## Instruction & Examples
 
