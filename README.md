@@ -105,6 +105,7 @@ Exiting script successfully!!!
 ```
 Alternatively, a text file can be passed as an argument into `command_file`, which can be useful for passing long, pre-defined multi-line commands. See below for an example, where we try to install `python3` on all specified machines.
 ```
+(cob_control) -bash-4.2$ python cob_send_commands.py --command_file ./command/example_install_python3.sh
 Opening COB config file...
 COB config file: ./config/cob_host_config.json
 Successfully loaded COB config file!!!
