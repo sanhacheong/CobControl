@@ -2,8 +2,10 @@
 config/*
 # Except the example config
 !config/example_host_config.json
-# Virtual environment set up at SLAC RDDEV111 machine
-setup_venv.sh
+# Command files specific to certain applications
+command/*
+# Except the examples
+!command/example_install_python3.sh
 # test files and directories
 test*
 

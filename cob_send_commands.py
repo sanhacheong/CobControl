@@ -1,16 +1,17 @@
 import json
+import os
 import re
 from pprint import pprint
 
 import fire
-import commands
 
 from pssh.clients import ParallelSSHClient
 from pssh.config import HostConfig
 
-def main(command,
+def main(command="",
+         command_file="",
          cob_name="COB2",
-         config_json="./cob_host_config.json",
+         config_json="./config/cob_host_config.json",
          target_machine="dpm"):
 
     print("Opening COB config file...")
@@ -37,20 +38,35 @@ def main(command,
     client = ParallelSSHClient(rce_hosts, host_config=rce_configs)
     print("Successfully configured SSH links!!!\n")
 
-    assert isinstance(command, (str, list))
-    if isinstance(command, str):
+    if command:
+        assert isinstance(command, (str, list))
+        if isinstance(command, str):
+            print("Sending the same command to all hosts...")
+            print(f"Hosts: {rce_hosts}")
+            print(f"Command: {command}")
+            output = client.run_command(command)
+            print("Commands sent without errors!!!")
+        elif isinstance(command, list):
+            print("Sending different command for each hosts in parallel...")
+            for i, cmd in enumerate(command):
+                print(f"Host: {rce_hosts[i]}")
+                print(f"Command: {cmd}")
+            output = client.run_command("%s", host_args=command)
+            print("Commands sent without errors!!!")
+    elif command_file:
+        assert os.path.exists(command_file)
+        with open(command_file, 'r') as f:
+            cmd = f.read().replace('\n', '; ')
         print("Sending the same command to all hosts...")
         print(f"Hosts: {rce_hosts}")
-        print(f"Command: {command}")
-        output = client.run_command(command)
-        print("Commands sent and run without errors!!!")
-    elif isinstance(command, list):
-        print("Sending different command for each hosts in parallel...")
-        for i, cmd in enumerate(command):
-            print(f"Host: {rce_hosts[i]}")
-            print(f"Command: {cmd}")
-        output = client.run_command("%s", host_args=command)
-        print("Commands sent and run without errors!!!")
+        print(f"Command: {cmd}")
+        output = client.run_command(cmd)
+        print("Commands sent without errors!!!")
+    else:
+        print(f"`command` or `command_file` arguments not specified correctly!")
+        print(f"Exiting without sending any commands!")
+        return -1
+
 
     # print(output)
 
@@ -62,6 +78,7 @@ def main(command,
         print()
 
     print("Exiting script successfully!!!")
+    return 0
 
 if __name__ == '__main__':
     fire.Fire(main)
