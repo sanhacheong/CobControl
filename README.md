@@ -31,9 +31,9 @@ To send commands via parallel SSH, each RCE on the COB must be accessible on the
 ## Instruction & Examples
 
 ### Sending CLI Commands
-The main script is `cob_send_commands.py`, and this script takes argument via CLI provided by    [python-fire](https://github.com/google/python-fire).
+The main script is `cob_send_commands.py`, and this script takes argument via CLI provided by [python-fire](https://github.com/google/python-fire).
 
-The main, required argument is `command` to be passed to all the machines. `command` can be a string or a list of strings.
+The main argument is `command` to be passed to all the machines. `command` can be a string or a list of strings.
 
 The target host machines can be specified by the optional argument `target_machine`, which is a case-insensitive, Python regex string that selects machines from the COB host configuration `.json` file. The default value for `target_machine` is `"dpm"`.
 
@@ -51,7 +51,7 @@ Successfully configured SSH links!!!
 Sending the same command to all hosts...
 Hosts: ['cob2_dpm00', 'cob2_dpm02', 'cob2_dpm12', 'cob2_dpm20', 'cob2_dpm22', 'cob2_dpm30', 'cob2_dpm32']
 Command: uname
-Commands sent and run without errors!!!
+Commands sent without errors!!!
 
 Printing stdout from host `cob2_dpm00`:
 Linux
@@ -92,7 +92,7 @@ Host: cob2_dpm20
 Command: date
 Host: cob2_dpm22
 Command: sleep 5; date
-Commands sent and run without errors!!!
+Commands sent without errors!!!
 
 Printing stdout from host `cob2_dpm20`:
 Thu Jul 21 00:12:02 UTC 2022
@@ -101,6 +101,57 @@ Printing stdout from host `cob2_dpm22`:
 Thu Jul 21 00:12:07 UTC 2022
 
 Exiting script successfully!!!
+0
+```
+Alternatively, a text file can be passed as an argument into `command_file`, which can be useful for passing long, pre-defined multi-line commands. See below for an example, where we try to install `python3` on all specified machines.
+```
+Opening COB config file...
+COB config file: ./config/cob_host_config.json
+Successfully loaded COB config file!!!
+
+Setting up SSH hosts...
+['cob2_dpm00', 'cob2_dpm02', 'cob2_dpm12', 'cob2_dpm20', 'cob2_dpm22', 'cob2_dpm30', 'cob2_dpm32']
+Successfully configured SSH links!!!
+
+Sending the same command to all hosts...
+Hosts: ['cob2_dpm00', 'cob2_dpm02', 'cob2_dpm12', 'cob2_dpm20', 'cob2_dpm22', 'cob2_dpm30', 'cob2_dpm32']
+Command: yum -y install python3; python3 -V
+Commands sent without errors!!!
+
+Printing stdout from host `cob2_dpm00`:
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.fcix.net
+ * extras: mirrors.ocf.berkeley.edu
+ * updates: mirrors.xtom.com
+Package python3-3.6.8-18.el7.armv7hl already installed and latest version
+Nothing to do
+Python 3.6.8
+
+Printing stdout from host `cob2_dpm02`:
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.ocf.berkeley.edu
+ * extras: mirrors.ocf.berkeley.edu
+ * updates: mirrors.xtom.com
+Package python3-3.6.8-18.el7.armv7hl already installed and latest version
+Nothing to do
+Python 3.6.8
+
+Printing stdout from host `cob2_dpm12`:
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.ocf.berkeley.edu
+ * extras: mirrors.ocf.berkeley.edu
+ * updates: mirrors.xtom.com
+Package python3-3.6.8-18.el7.armv7hl already installed and latest version
+Nothing to do
+Python 3.6.8
+
+...
+
+Exiting script successfully!!!
+0
 ```
 
 ### Sending and Receiving Files

@@ -56,7 +56,7 @@ def main(command="",
     elif command_file:
         assert os.path.exists(command_file)
         with open(command_file, 'r') as f:
-            cmd = f.read().replace('\n', '; ')
+            cmd = f.read().replace('\n', "; ")[:-2] # remove trailing "; "
         print("Sending the same command to all hosts...")
         print(f"Hosts: {rce_hosts}")
         print(f"Command: {cmd}")
